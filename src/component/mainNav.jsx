@@ -36,7 +36,7 @@ function NavList() {
                 variant="small"
                 className="p-1 font-medium"
                 >
-                    <Link to="" className="flex items-center  text-gray-400 hover:text-white">
+                    <Link to="/series" className="flex items-center  text-gray-400 hover:text-white">
                         Series
                     </Link>
                 </Typography>

@@ -13,28 +13,28 @@ import {
   import {Link} from "react-router-dom";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
-const Movies = () => {
+const Series = () => {
     const [active, setActive] = useState(1);
-    const [allMovies,setAllMovies] = useState([]);
+    const [allSeries,setAllSeries] = useState([]);
     const [loading,setLoading] = useState(true);
     const [err,setErr] = useState(false);
-    const getAllMovies = () => {
-        const options = {
-            method: 'GET',
-            headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MTViOWNkYTliYWQwOTg1MGNjNTk4ZjMzYzIxMmYyNyIsIm5iZiI6MTcyODA1MDcwOS41NDEsInN1YiI6IjY2ZmZmNjE1MTU5MmVmMWJhOTg1MWM4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BLDzvE3JjpnDnXJp65L2ww7pclm633QVmw5K1JssZEY'
-            }
-          };
-          
-          fetch(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=${active}`, options)
-            .then(res => res.json())
-            .then(res => {setAllMovies(res.results);setLoading(false);setErr(false)})
-            .catch(() => {setErr(true);setLoading(false)});
+    const getAllSeries = () => {
+            const options = {
+                method: 'GET',
+                headers: {
+                  accept: 'application/json',
+                  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MTViOWNkYTliYWQwOTg1MGNjNTk4ZjMzYzIxMmYyNyIsIm5iZiI6MTcyODA1MDcwOS41NDEsInN1YiI6IjY2ZmZmNjE1MTU5MmVmMWJhOTg1MWM4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BLDzvE3JjpnDnXJp65L2ww7pclm633QVmw5K1JssZEY'
+                }
+              };
+              
+              fetch(`https://api.themoviedb.org/3/tv/popular?language=en-US&page=${active}`, options)
+                .then(res => res.json())
+                .then(res =>  {setAllSeries(res.results);setLoading(false);setErr(false)})
+                .catch(err => {setErr(true);setLoading(false)});
     }
     useEffect(()=>{
         setLoading(true);
-        getAllMovies()
+        getAllSeries()
     },[active])
     const next = () => {
       if (active === 500) return;
@@ -55,7 +55,7 @@ const Movies = () => {
     return(
         <div className="container mx-auto flex flex-col items-center">
             <div className="text-center text-xl md:text-4xl py-5 font-bold text-white">
-                <p className="my-5">MOVIES</p>
+                <p className="my-5">SERIES</p>
                 <p className="my-5">PAGE NUMBER <span className="text-[#0d6efd]">{active}</span> FROM <span className="text-[#0d6efd]">500</span></p>
             </div>
             <div className={`grid items-center ${(loading || err) ? "grid-cols-1 h-screen" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-7 py-7"}`}>
@@ -78,7 +78,7 @@ const Movies = () => {
 
 
                     :
-                    allMovies.map(({poster_path,title,vote_average},index)=>(
+                    allSeries.map(({poster_path,name,vote_average},index)=>(
                         <Card className={`bg-[#212529] h-[80vh] w-full`} key={index}>
                             <CardHeader
                             className="m-0 rounded h-[65%]"
@@ -86,12 +86,12 @@ const Movies = () => {
                                 <img
                                     src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${poster_path}`}
                                     alt="ui/ux review check"
-                                    className="h-full bg-cover w-full"
+                                    className="bg-cover w-full"
                                 />
                             </CardHeader>
                             <CardBody className="h-[20%] text-center md:text-left">
                                 <Typography variant="p" color="white" className="text-sm md:text-xl">
-                                    TITLE : {title}
+                                    TITLE : {name}
                                 </Typography>
                                 <div className="flex flex-col items-center text-white md:flex-row md:justify-between">
                                     <p>Rate:{vote_average.toFixed(1)}</p>
@@ -154,4 +154,4 @@ const Movies = () => {
     )
 }
 
-export default Movies;
+export default Series;
