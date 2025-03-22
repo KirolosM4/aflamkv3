@@ -106,14 +106,14 @@ const MainNav = () => {
             </div>
             <IconButton
                 variant="text"
-                className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent xl:hidden"
+                className=" border-2 border-gray-800 rounded px-5 ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent xl:hidden"
                 ripple={false}
                 onClick={() => setOpenNav(!openNav)}
             >
                 {openNav ? (
-                <XMarkIcon className="h-6 w-6" strokeWidth={2} />
+                <XMarkIcon className="h-6 w-6 text-gray-800" strokeWidth={2} />
                 ) : (
-                <Bars3Icon className="h-6 w-6" strokeWidth={2} />
+                <Bars3Icon className="h-6 w-6 text-gray-800" strokeWidth={2} />
                 )}
             </IconButton>
             </div>
