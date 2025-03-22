@@ -2,12 +2,20 @@ import React from "react";
 import MainNav from "./component/mainNav";
 import HeaderHome from "./componentHome/HeaderHome";
 import Home from "./Home";
+import { Route, Routes } from "react-router-dom";
+import Movies from "./Moives";
+import MainFooter from "./component/mainFooter";
 
 const App = () => {
   return(
     <div className="bg-black">
       <MainNav/>
-      <Home/>
+      <Routes>
+        <Route path="/*" element={<Home/>}/>
+        <Route path="/movies" element={<Movies/>}/>
+
+      </Routes>
+      <MainFooter/>
     </div>
   )
 }

@@ -18,7 +18,7 @@ function NavList() {
                 variant="small"
                 className="p-1 font-medium"
                 >
-                    <Link to="" className="flex items-center text-gray-400 hover:text-white">
+                    <Link to="/" className="flex items-center text-gray-400 hover:text-white">
                         Home
                     </Link>
                 </Typography>
@@ -27,7 +27,7 @@ function NavList() {
                 variant="small"
                 className="p-1 font-medium"
                 >
-                    <Link to="" className="flex items-center  text-gray-400 hover:text-white">
+                    <Link to="/movies" className="flex items-center  text-gray-400 hover:text-white">
                         Movies
                     </Link>
                 </Typography>
