@@ -11,7 +11,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 function NavList() {
     return (
-        <div className="flex flex-col items-center xl:flex-row xl:justify-between">
+        <div className="flex flex-col  items-center xl:flex-row xl:justify-between">
             <ul className="my-2 flex flex-col gap-2 xl:mb-0 xl:mt-0 xl:flex-row xl:items-center xl:gap-6">
                 <Typography
                 as="li"
@@ -45,7 +45,7 @@ function NavList() {
                 variant="small"
                 className="p-1 font-medium"
                 >
-                    <Link to="" className="flex items-center  text-gray-400 hover:text-white">
+                    <Link to="/contactus" className="flex items-center  text-gray-400 hover:text-white">
                         Contact Us
                     </Link>
                 </Typography>
@@ -117,8 +117,8 @@ const MainNav = () => {
                 )}
             </IconButton>
             </div>
-            <Collapse open={openNav}>
-            <NavList />
+            <Collapse className="text-center" open={openNav}>
+                <NavList/>
             </Collapse>
         </Navbar>
     )

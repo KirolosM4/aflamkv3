@@ -58,7 +58,7 @@ const Series = () => {
                 <p className="my-5">SERIES</p>
                 <p className="my-5">PAGE NUMBER <span className="text-[#0d6efd]">{active}</span> FROM <span className="text-[#0d6efd]">500</span></p>
             </div>
-            <div className={`grid items-center ${(loading || err) ? "grid-cols-1 h-screen" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-7 py-7"}`}>
+            <div className={`mx-11 md:mx-1 grid items-center ${(loading || err) ? "grid-cols-1 h-screen" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-7 py-7"}`}>
                 {
                     loading
                     ?
@@ -86,7 +86,7 @@ const Series = () => {
                                 <img
                                     src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${poster_path}`}
                                     alt="ui/ux review check"
-                                    className="bg-cover w-full"
+                                    className="bg-cover h-full w-full"
                                 />
                             </CardHeader>
                             <CardBody className="h-[20%] text-center md:text-left">

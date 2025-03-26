@@ -6,7 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Movies from "./Moives";
 import MainFooter from "./component/mainFooter";
 import Series from "./Series";
-
+import ContactUs from "./contactUs";
 const App = () => {
   return(
     <div className="bg-black">
@@ -15,6 +15,7 @@ const App = () => {
         <Route path="/*" element={<Home/>}/>
         <Route path="/movies" element={<Movies/>}/>
         <Route path="/series" element={<Series/>}/>
+        <Route path="/contactus" element={<ContactUs/>}/>
       </Routes>
       <MainFooter/>
     </div>
