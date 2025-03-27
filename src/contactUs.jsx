@@ -42,12 +42,6 @@ const ContactUs = () => {
             }
         );
     };
-    useEffect(()=>{
-        clearTimeout(time);
-        time = setTimeout(()=>{
-            setEmailType(false);
-        },2000)
-    },[emailType])
     return(
         <div className="bg-[#1A1E21]">
             <div className="container mx-auto flex flex-col items-center h-screen">
@@ -58,16 +52,16 @@ const ContactUs = () => {
                         <Typography variant="h6" color="white" className="-mb-3">
                             {emailType ? <p className='text-[#0d6efd]'>typing...</p> : "Email Address"}
                         </Typography>
-                        <input type="text" name='email' className="p-2 rounded bg-[#1A1E21] border-2 border-[#0D6EFD] focus:outline-none focus:ring focus:ring-violet-300" onChange={()=>setEmailType(true)} on  />
+                        <input type="text" name='email' className="p-2 rounded bg-[#1A1E21] border-2 border-[#0D6EFD] focus:outline-none focus:ring focus:ring-violet-300" onChange={()=>setEmailType(true)} onKeyDown={()=>clearTimeout(time)} onKeyUp={()=>time = setTimeout(()=>{setEmailType(false);},2500)}/>
                         
                         <Typography variant="h6" color="white" className="-mb-3">
-                            Your Subject
+                            {subjectType ? <p className='text-[#0d6efd]'>typing...</p> : "Your Subject"}
                         </Typography>
-                        <input type="text" name='subject' className="p-2 rounded bg-[#1A1E21] border-2 border-[#0D6EFD] focus:outline-none focus:ring focus:ring-violet-300"  />
+                        <input type="text" name='subject' className="p-2 rounded bg-[#1A1E21] border-2 border-[#0D6EFD] focus:outline-none focus:ring focus:ring-violet-300" onChange={()=>setSubjectType(true)} onKeyDown={()=>clearTimeout(time)} onKeyUp={()=>time = setTimeout(()=>{setSubjectType(false);},2500)} />
                         <Typography variant="h6" color="white" className="-mb-3">
-                            Your Message
+                            {messageType ? <p className='text-[#0d6efd]'>typing...</p> : "Your Message"}
                         </Typography>
-                        <textarea name='message' rows={5} className="p-2 rounded bg-[#1A1E21] border-2 border-[#0D6EFD] focus:outline-none focus:ring focus:ring-violet-300"  ></textarea>
+                        <textarea name='message' rows={5} className="p-2 rounded bg-[#1A1E21] border-2 border-[#0D6EFD] focus:outline-none focus:ring focus:ring-violet-300" onChange={()=>setMessageType(true)} onKeyDown={()=>clearTimeout(time)} onKeyUp={()=>time = setTimeout(()=>{setMessageType(false);},2500)}></textarea>
                         </div>
                         <div className="flex justify-center">
                             <Button type='submit' className="flex justify-center p-2 rounded bg-[#1A1E21] border-2 border-[#0D6EFD] focus:outline-none focus:ring focus:ring-violet-300 my-5 p-3 w-[50%]">
