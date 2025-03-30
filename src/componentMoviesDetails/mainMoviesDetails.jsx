@@ -7,8 +7,9 @@ import { Button } from "@material-tailwind/react";
 
 const MainMoviesDetails = () => {
     const navigate = useNavigate();
-    const {movieId} = useParams()
-    const [movieDetails,setMovieDetails] = useState({})
+    const {movieId} = useParams();
+    const [movieDetails,setMovieDetails] = useState({});
+    const [loading,setLoading] = useState(true);
     const [casting,setCasting] = useState({cast:[{name:" ",known_for_department:" "},{name:" ",known_for_department:" "}],crew:[{name:" ",department:" "},{name:" ",department:" "},{name:" ",department:" "}]});
     const getMoviesDetails = () => {
         const options = {
@@ -35,7 +36,7 @@ const MainMoviesDetails = () => {
           
           fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`, options)
             .then(res => res.json())
-            .then(res => setCasting(res))
+            .then(res => {setCasting(res);setLoading(false)})
             .catch(err => console.error(err));
     }
     useEffect(()=>{
@@ -45,6 +46,13 @@ const MainMoviesDetails = () => {
     },[])
     return(
         <div>
+            {
+                loading
+                ?
+                <div className="h-screen flex items-center justify-center">
+                    <div className="loader"></div>
+                </div>
+                :
                 <div className={` bg-no-repeat bg-cover bg-center relative before:absolute before:content-[" "] before:w-full before:h-full before:top-0 before:bg-gradient-to-b from-black via-transparent  to-black before:opacity-70`} style={{backgroundImage:`url(https://image.tmdb.org/t/p/w600_and_h900_bestv2${movieDetails.backdrop_path})`}}>
                     <div className="container mx-auto">
                         <p className="text-[#0dcaf0] text-center text-4xl py-11 font-bold relative">Movie Details</p>
@@ -97,6 +105,7 @@ const MainMoviesDetails = () => {
                         </div>
                     </div>
                 </div>
+            }
         </div>
     )
 }
