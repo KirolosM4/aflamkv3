@@ -10,7 +10,7 @@ import {
     IconButton
   } from "@material-tailwind/react";
   import ReactStars from 'react-stars'
-  import {Link} from "react-router-dom";
+  import {Link, useParams} from "react-router-dom";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const Movies = () => {
@@ -78,7 +78,7 @@ const Movies = () => {
 
 
                     :
-                    allMovies.map(({poster_path,title,vote_average},index)=>(
+                    allMovies.map(({poster_path,title,vote_average,id},index)=>(
                         <Card className={`bg-[#212529] h-[80vh] w-full`} key={index}>
                             <CardHeader
                             className="m-0 rounded h-[65%]"
@@ -104,7 +104,7 @@ const Movies = () => {
                             </CardBody>
                             <CardFooter className="text-center h-[10%]">
                                 <Button className="bg-transparent border-2 border-[#0DCAF0] text-[#0DCAF0] hover:bg-[#0DCAF0] hover:text-black">
-                                    <Link>DETAILS</Link>
+                                        <Link to={`/movie/${id}/title/${title}`}>DETAILS</Link>
                                 </Button>
                             </CardFooter>
                         </Card>
