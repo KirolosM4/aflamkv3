@@ -4,13 +4,15 @@ import { FaRegHandPointRight,FaRegHandPointLeft } from "react-icons/fa6";
 import { MdNoteAdd,MdStarBorder } from "react-icons/md";
 import { SiYoutubemusic } from "react-icons/si";
 import { Button } from "@material-tailwind/react";
+import {DotLottieReact} from "@lottiefiles/dotlottie-react"
 
 const MainMoviesDetails = () => {
     const navigate = useNavigate();
     const {movieId} = useParams();
     const [movieDetails,setMovieDetails] = useState({});
     const [loading,setLoading] = useState(true);
-    const [casting,setCasting] = useState({cast:[{name:" ",known_for_department:" "},{name:" ",known_for_department:" "}],crew:[{name:" ",department:" "},{name:" ",department:" "},{name:" ",department:" "}]});
+    const [err,setError] = useState(false);
+    const [casting,setCasting] = useState({});
     const getMoviesDetails = () => {
         const options = {
             method: 'GET',
@@ -36,8 +38,8 @@ const MainMoviesDetails = () => {
           
           fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`, options)
             .then(res => res.json())
-            .then(res => {setCasting(res);setLoading(false)})
-            .catch(err => console.error(err));
+            .then(res => {setCasting(res);setLoading(false);setError(false)})
+            .catch(() => {setLoading(false);setError(true)});
     }
     useEffect(()=>{
         getMoviesDetails();
@@ -51,6 +53,18 @@ const MainMoviesDetails = () => {
                 ?
                 <div className="h-screen flex items-center justify-center">
                     <div className="loader"></div>
+                </div>
+                :
+                err
+                ?
+                <div className='flex justify-center items-center h-screen text-red-500 text-3xl'>
+                    Not Found
+                    <DotLottieReact
+                    src="https://lottie.host/3f1a2a1b-4c5d-41bf-a513-2e6ebc2630b8/xRMGEMLGLh.lottie"
+                    loop
+                    autoplay
+                    className='w-[2em]'
+                    />
                 </div>
                 :
                 <div className={` bg-no-repeat bg-cover bg-center relative before:absolute before:content-[" "] before:w-full before:h-full before:top-0 before:bg-gradient-to-b from-black via-transparent  to-black before:opacity-70`} style={{backgroundImage:`url(https://image.tmdb.org/t/p/w600_and_h900_bestv2${movieDetails.backdrop_path})`}}>
@@ -81,16 +95,16 @@ const MainMoviesDetails = () => {
                                 <p className="text-[#0dcaf0] text-4xl">Casting : </p>
                                 <div className="flex flex-col gap-7 justify-center">
                                     <div className="flex flex-col xl:flex-row justify-around items-center">
-                                        <p className="flex flex-col text-center text-xl"><span>{casting.cast[0]?.name}</span><span className="text-yellow-700">{casting.cast[0]?.known_for_department}</span></p>
+                                        <p className="flex flex-col text-center text-xl"><span>{(casting.cast[0]?.name  || " ")}</span><span className="text-yellow-700">{(casting.cast[0]?.known_for_department || " ")}</span></p>
                                         <p>||</p>
-                                        <p className="flex flex-col text-center text-xl"><span>{casting.cast[1]?.name}</span><span className="text-yellow-700">{casting.cast[1]?.known_for_department}</span></p>
+                                        <p className="flex flex-col text-center text-xl"><span>{(casting.cast[1]?.name || " ")}</span><span className="text-yellow-700">{(casting.cast[1]?.known_for_department || " ")}</span></p>
                                     </div>
                                     <div className="flex flex-col xl:flex-row justify-around items-center">
-                                        <p className="flex flex-col text-center text-xl"><span>{casting.crew[0]?.name}</span><span className="text-yellow-700">{casting.crew[0]?.department || "production"}</span></p>
+                                        <p className="flex flex-col text-center text-xl"><span>{(casting.crew[0]?.name || " ")}</span><span className="text-yellow-700">{(casting.crew[0]?.department || "production" || " ")}</span></p>
                                         <p>||</p>
-                                        <p className="flex flex-col text-center text-xl"><span>{casting.crew[1]?.name}</span><span className="text-yellow-700">{casting.crew[1]?.department|| "production"}</span></p>
+                                        <p className="flex flex-col text-center text-xl"><span>{(casting.crew[1]?.name || " ")}</span><span className="text-yellow-700">{(casting.crew[1]?.department|| "production" || " ")}</span></p>
                                         <p>||</p>
-                                        <p className="flex flex-col text-center text-xl"><span>{casting.crew[2]?.name}</span><span className="text-yellow-700">{casting.crew[2]?.department|| "production"}</span></p>
+                                        <p className="flex flex-col text-center text-xl"><span>{(casting.crew[2]?.name || " ")}</span><span className="text-yellow-700">{(casting.crew[2]?.department|| "production" || " ")}</span></p>
                                     </div>
                                     <div className="flex flex-col xl:flex-row justify-around items-center">
                                         <p className="flex flex-col items-center gap-3"><span><MdNoteAdd color="green" className="text-2xl" /> </span><span>Add whatchList</span></p>
