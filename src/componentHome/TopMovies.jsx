@@ -33,7 +33,7 @@ const TopMovies = () => {
     },[])
     return(
         <div className={(err || loading) && "h-[60vh]"}>
-            <p className="text-[#0d6efd] text-center text-4xl py-11 font-bold md:text-left">TOP MOVIES</p>
+            <p className="text-[#0DCAF0] text-center text-4xl py-11 font-bold md:text-left">TOP MOVIES</p>
             <div className={`${err || loading ? "grid-cols-1 items-center h-[60%]" : " md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 "} grid grid-cols-1 px-3 justify-items-center  gap-11`}>
                 {
                     loading
@@ -77,7 +77,7 @@ const TopMovies = () => {
                                 </div>
                             </CardBody>
                             <CardFooter className="text-center h-[10%]">
-                                <Button className="bg-transparent border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white">
+                                <Button className="bg-transparent border-2 border-[#0DCAF0] text-[#0DCAF0] hover:bg-[#0DCAF0] hover:text-black">
                                     <Link>DETAILS</Link>
                                 </Button>
                             </CardFooter>

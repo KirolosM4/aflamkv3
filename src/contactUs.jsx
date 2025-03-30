@@ -45,26 +45,26 @@ const ContactUs = () => {
     return(
         <div className="bg-[#1A1E21]">
             <div className="container mx-auto flex flex-col items-center h-screen">
-                <p className="text-[#0d6efd] text-center text-2xl py-11 font-bold">Contact With The Website Developer!</p>
+                <p className="text-[#0DCAF0] text-center text-2xl py-11 font-bold">Contact With The Website Developer!</p>
                 <Card color="transparent" className="shadow-2xl shadow-black w-[70%] lg:w-[35%] px-5">
-                        <form ref={form} onSubmit={(e)=>sendEmail(e)} className="mt-8 mb-2 w-full">
+                    <form ref={form} onSubmit={(e)=>sendEmail(e)} className="mt-8 mb-2 w-full">
                         <div className="mb-1 flex flex-col gap-6">
                         <Typography variant="h6" color="white" className="-mb-3">
-                            {emailType ? <p className='text-[#0d6efd]'>typing...</p> : "Email Address"}
+                            {emailType ? <p className='text-[#0DCAF0]'>typing...</p> : "Email Address"}
                         </Typography>
-                        <input type="text" name='email' className="p-2 rounded bg-[#1A1E21] border-2 border-[#0D6EFD] focus:outline-none focus:ring focus:ring-violet-300" onChange={()=>setEmailType(true)} onKeyDown={()=>clearTimeout(time)} onKeyUp={()=>time = setTimeout(()=>{setEmailType(false);},2500)}/>
+                        <input type="text" name='email' className="p-2 rounded bg-[#1A1E21] border-2 border-[#0DCAF0] focus:outline-none focus:ring focus:ring-violet-300" onChange={()=>setEmailType(true)} onKeyDown={()=>clearTimeout(time)} onKeyUp={()=>time = setTimeout(()=>{setEmailType(false);},2500)}/>
                         
                         <Typography variant="h6" color="white" className="-mb-3">
-                            {subjectType ? <p className='text-[#0d6efd]'>typing...</p> : "Your Subject"}
+                            {subjectType ? <p className='text-[#0DCAF0]'>typing...</p> : "Your Subject"}
                         </Typography>
-                        <input type="text" name='subject' className="p-2 rounded bg-[#1A1E21] border-2 border-[#0D6EFD] focus:outline-none focus:ring focus:ring-violet-300" onChange={()=>setSubjectType(true)} onKeyDown={()=>clearTimeout(time)} onKeyUp={()=>time = setTimeout(()=>{setSubjectType(false);},2500)} />
+                        <input type="text" name='subject' className="p-2 rounded bg-[#1A1E21] border-2 border-[#0DCAF0] focus:outline-none focus:ring focus:ring-violet-300" onChange={()=>setSubjectType(true)} onKeyDown={()=>clearTimeout(time)} onKeyUp={()=>time = setTimeout(()=>{setSubjectType(false);},2500)} />
                         <Typography variant="h6" color="white" className="-mb-3">
-                            {messageType ? <p className='text-[#0d6efd]'>typing...</p> : "Your Message"}
+                            {messageType ? <p className='text-[#0DCAF0]'>typing...</p> : "Your Message"}
                         </Typography>
-                        <textarea name='message' rows={5} className="p-2 rounded bg-[#1A1E21] border-2 border-[#0D6EFD] focus:outline-none focus:ring focus:ring-violet-300" onChange={()=>setMessageType(true)} onKeyDown={()=>clearTimeout(time)} onKeyUp={()=>time = setTimeout(()=>{setMessageType(false);},2500)}></textarea>
+                        <textarea name='message' rows={5} className="p-2 rounded bg-[#1A1E21] border-2 border-[#0DCAF0] focus:outline-none focus:ring focus:ring-violet-300" onChange={()=>setMessageType(true)} onKeyDown={()=>clearTimeout(time)} onKeyUp={()=>time = setTimeout(()=>{setMessageType(false);},2500)}></textarea>
                         </div>
                         <div className="flex justify-center">
-                            <Button type='submit' className="flex justify-center p-2 rounded bg-[#1A1E21] border-2 border-[#0D6EFD] focus:outline-none focus:ring focus:ring-violet-300 my-5 p-3 w-[50%]">
+                            <Button type='submit' className="flex justify-center p-2 rounded bg-[#1A1E21] border-2 border-[#0DCAF0] focus:outline-none focus:ring focus:ring-violet-300 my-5 p-3 w-[50%]">
                                 {loading ? <Spinner className='text-white'/> : "Submit"}
                             </Button>
                         </div>

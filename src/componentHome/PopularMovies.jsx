@@ -28,7 +28,7 @@ const PopularMovies = () => {
         },[])
     return(
         <div className='h-[80vh]'>
-            <p className="text-[#0d6efd] text-center md:text-left text-4xl py-11 font-bold">MOVIES</p>
+            <p className="text-[#0DCAF0] text-center md:text-left text-4xl py-11 font-bold">MOVIES</p>
             {
                 loading
                 ?
@@ -58,9 +58,9 @@ const PopularMovies = () => {
                 className={`px-4 ${window.innerWidth < 720 ? "w-[60%]" : "w-full"}`}
                 >
                 {
-                    popMovies.map(({poster_path},index)=>(
+                    popMovies.map(({poster_path,id,original_title},index)=>(
                         <SwiperSlide key={index}>
-                            <Link><img className='bg-cover' src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${poster_path}`} alt="" /></Link>
+                            <Link to={`/movie/${id}/title/${original_title}`}><img className='bg-cover' src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${poster_path}`} alt="" /></Link>
                         </SwiperSlide>
                     ))
                 }

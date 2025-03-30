@@ -28,7 +28,7 @@ const PopularSeries = () => {
         },[])
     return(
         <div className='h-[80vh]'>
-            <p className="text-[#0d6efd] text-center md:text-left text-4xl py-11 font-bold">SERIES</p>
+            <p className="text-[#0DCAF0] text-center md:text-left text-4xl py-11 font-bold">SERIES</p>
             {
                 loading
                 ?

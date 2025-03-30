@@ -4,7 +4,7 @@ import { Button } from "@material-tailwind/react";
 const HeaderHome = () => {
     return(
         <div className="container mx-auto py-6 text-center bg-black">
-            <p className="text-[#0d6efd] text-4xl p-3 font-bold">Home</p>
+            <p className="text-[#0DCAF0] text-4xl p-3 font-bold">Home</p>
             <div className="flex flex-col items-center gap-7 lg:flex-row lg:justify-between">
                 <div className="flex flex-col text-white gap-5 text-2xl font-bold">
                     <p>SORT BY</p>

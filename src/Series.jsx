@@ -56,7 +56,7 @@ const Series = () => {
         <div className="container mx-auto flex flex-col items-center">
             <div className="text-center text-xl md:text-4xl py-5 font-bold text-white">
                 <p className="my-5">SERIES</p>
-                <p className="my-5">PAGE NUMBER <span className="text-[#0d6efd]">{active}</span> FROM <span className="text-[#0d6efd]">500</span></p>
+                <p className="my-5">PAGE NUMBER <span className="text-[#0DCAF0]">{active}</span> FROM <span className="text-[#0DCAF0]">500</span></p>
             </div>
             <div className={`mx-11 md:mx-1 grid items-center ${(loading || err) ? "grid-cols-1 h-screen" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-7 py-7"}`}>
                 {
@@ -103,7 +103,7 @@ const Series = () => {
                                 </div>
                             </CardBody>
                             <CardFooter className="text-center h-[10%]">
-                                <Button className="bg-transparent border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white">
+                                <Button className="bg-transparent border-2 border-[#0DCAF0] text-[#0DCAF0] hover:bg-[#0DCAF0] hover:text-black">
                                     <Link>DETAILS</Link>
                                 </Button>
                             </CardFooter>

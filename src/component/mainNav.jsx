@@ -80,7 +80,7 @@ function NavList() {
                 color="blue-gray"
                 className="p-1 font-medium"
                 >
-                    <Button className="w-full bg-transparent border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white">Log in</Button>
+                    <Button className="w-full bg-transparent border-2 border-[#0DCAF0] text-[#0DCAF0] hover:bg-[#0DCAF0] hover:text-white">Log in</Button>
                 </Typography>
             </ul>
         </div>
