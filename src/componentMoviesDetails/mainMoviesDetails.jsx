@@ -45,17 +45,14 @@ const MainMoviesDetails = () => {
     },[])
     return(
         <div>
-            {
-                (movieDetails && casting)
-                ?
                 <div className={` bg-no-repeat bg-cover bg-center relative before:absolute before:content-[" "] before:w-full before:h-full before:top-0 before:bg-gradient-to-b from-black via-transparent  to-black before:opacity-70`} style={{backgroundImage:`url(https://image.tmdb.org/t/p/w600_and_h900_bestv2${movieDetails.backdrop_path})`}}>
                     <div className="container mx-auto">
                         <p className="text-[#0dcaf0] text-center text-4xl py-11 font-bold relative">Movie Details</p>
-                        <div className="flex flex-col xl:flex-row">
+                        <div className="flex flex-col xl:flex-row pb-7">
                             <div className="flex relative w-full justify-center">
-                                <img className="w-1/3 xl:w-[75%] relative" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movieDetails.poster_path}`} alt="" />
+                                <img className="w-[65%] relative" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movieDetails.poster_path}`} alt="" />
                             </div>
-                            <div className="col-start-2 col-span-2 text-white relative flex flex-col gap-3 text-center xl:text-left">
+                            <div className="grow col-start-2 col-span-2 text-white relative flex flex-col gap-3 text-center xl:text-left">
                                 <p className="text-2xl xl:text-4xl">{movieDetails.original_title}</p>
                                 <div className="flex flex-col xl:flex-row gap-2 items-center">
                                     <div className="flex items-center">
@@ -72,7 +69,7 @@ const MainMoviesDetails = () => {
                                         <FaRegHandPointLeft color="yellow"/>
                                     </div>
                                 </div>
-                                <p><span className="text-[#0dcaf0] text-center text-4xl py-11">OverView : </span>{movieDetails.overview}</p>
+                                <p><span className="text-[#0dcaf0] text-center text-4xl py-11">OverView : </span>{movieDetails.overview?.slice(0,300)}</p>
                                 <p className="text-[#0dcaf0] text-4xl">Casting : </p>
                                 <div className="flex flex-col gap-7 justify-center">
                                     <div className="flex flex-col xl:flex-row justify-around items-center">
@@ -81,11 +78,11 @@ const MainMoviesDetails = () => {
                                         <p className="flex flex-col text-center text-xl"><span>{casting.cast[1]?.name}</span><span className="text-yellow-700">{casting.cast[1]?.known_for_department}</span></p>
                                     </div>
                                     <div className="flex flex-col xl:flex-row justify-around items-center">
-                                        <p className="flex flex-col text-center text-xl"><span>{casting.crew[0]?.name}</span><span className="text-yellow-700">{casting.crew[0]?.department}</span></p>
+                                        <p className="flex flex-col text-center text-xl"><span>{casting.crew[0]?.name}</span><span className="text-yellow-700">{casting.crew[0]?.department || "production"}</span></p>
                                         <p>||</p>
-                                        <p className="flex flex-col text-center text-xl"><span>{casting.crew[1]?.name}</span><span className="text-yellow-700">{casting.crew[1]?.department}</span></p>
+                                        <p className="flex flex-col text-center text-xl"><span>{casting.crew[1]?.name}</span><span className="text-yellow-700">{casting.crew[1]?.department|| "production"}</span></p>
                                         <p>||</p>
-                                        <p className="flex flex-col text-center text-xl"><span>{casting.crew[2]?.name}</span><span className="text-yellow-700">{casting.crew[2]?.department}</span></p>
+                                        <p className="flex flex-col text-center text-xl"><span>{casting.crew[2]?.name}</span><span className="text-yellow-700">{casting.crew[2]?.department|| "production"}</span></p>
                                     </div>
                                     <div className="flex flex-col xl:flex-row justify-around items-center">
                                         <p className="flex flex-col items-center gap-3"><span><MdNoteAdd color="green" className="text-2xl" /> </span><span>Add whatchList</span></p>
@@ -100,9 +97,6 @@ const MainMoviesDetails = () => {
                         </div>
                     </div>
                 </div>
-                :
-                <div className="loader h-screen"></div>
-            }
         </div>
     )
 }
