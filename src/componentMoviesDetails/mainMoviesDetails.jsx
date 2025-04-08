@@ -13,6 +13,10 @@ const MainMoviesDetails = () => {
     const [loading,setLoading] = useState(true);
     const [err,setError] = useState(false);
     const [casting,setCasting] = useState({});
+    const [loadTrailar,setLoadTrailar] = useState(false);
+    const [keyVideo,setKeyVideo] = useState("");
+    const [showTrailar,setShowTrailar] = useState(false);
+    //get details of movies
     const getMoviesDetails = () => {
         const options = {
             method: 'GET',
@@ -27,6 +31,7 @@ const MainMoviesDetails = () => {
             .then(res => setMovieDetails(res))
             .catch(err => console.error(err));
     }
+    //get casting of movies
     const getCasting = () => {
         const options = {
             method: 'GET',
@@ -41,11 +46,26 @@ const MainMoviesDetails = () => {
             .then(res => {setCasting(res);setLoading(false);setError(false)})
             .catch(() => {setLoading(false);setError(true)});
     }
+    //get trailare of movies
+    const getTrailer = () => {
+        const options = {
+            method: 'GET',
+            headers: {
+              accept: 'application/json',
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MTViOWNkYTliYWQwOTg1MGNjNTk4ZjMzYzIxMmYyNyIsIm5iZiI6MTcyODA1MDcwOS41NDEsInN1YiI6IjY2ZmZmNjE1MTU5MmVmMWJhOTg1MWM4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BLDzvE3JjpnDnXJp65L2ww7pclm633QVmw5K1JssZEY'
+            }
+          };
+          
+          fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`, options)
+            .then(res => res.json())
+            .then(res => setKeyVideo(res.results[0].key))
+            .catch(err => console.error(err));
+    }
     useEffect(()=>{
         getMoviesDetails();
         getCasting();
-        console.log(casting)
     },[])
+
     return(
         <div>
             {
@@ -67,7 +87,14 @@ const MainMoviesDetails = () => {
                     />
                 </div>
                 :
-                <div className={` bg-no-repeat bg-cover bg-center relative before:absolute before:content-[" "] before:w-full before:h-full before:top-0 before:bg-gradient-to-b from-black via-transparent  to-black before:opacity-70`} style={{backgroundImage:`url(https://image.tmdb.org/t/p/w600_and_h900_bestv2${movieDetails.backdrop_path})`}}>
+                <div className={`bg-no-repeat bg-cover bg-center relative before:absolute before:content-[" "] before:w-full before:h-full before:top-0 before:bg-gradient-to-b from-black via-transparent  to-black before:opacity-70`} style={{backgroundImage:`url(https://image.tmdb.org/t/p/w600_and_h900_bestv2${movieDetails.backdrop_path})`}}>
+                    {
+                        showTrailar
+                        &&
+                        <div className="fixed z-10 top-0 flex justify-center h-screen w-screen bg-[#00000063]" onClick={()=>setShowTrailar(false)}>
+                            <iframe className={`absolute transition-opacity border-[20px] border-gray-900`} width="560" height="315" src={`https://www.youtube.com/embed/slSwwaZ0KoM?si=${keyVideo}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    }
                     <div className="container mx-auto">
                         <p className="text-[#0dcaf0] text-center text-4xl py-11 font-bold relative">Movie Details</p>
                         <div className="flex flex-col xl:flex-row pb-7">
@@ -91,7 +118,7 @@ const MainMoviesDetails = () => {
                                         <FaRegHandPointLeft color="yellow"/>
                                     </div>
                                 </div>
-                                <p><span className="text-[#0dcaf0] text-center text-4xl py-11">OverView : </span>{movieDetails.overview?.slice(0,300)}</p>
+                                <p className="text-[1em]"><span className="text-[#0dcaf0] text-center text-4xl py-11">OverView : </span>{movieDetails.overview?.split(".").slice(0,3).join(".")}</p>
                                 <p className="text-[#0dcaf0] text-4xl">Casting : </p>
                                 <div className="flex flex-col gap-7 justify-center">
                                     <div className="flex flex-col xl:flex-row justify-around items-center">
@@ -109,7 +136,7 @@ const MainMoviesDetails = () => {
                                     <div className="flex flex-col xl:flex-row justify-around items-center">
                                         <p className="flex flex-col items-center gap-3"><span><MdNoteAdd color="green" className="text-2xl" /> </span><span>Add whatchList</span></p>
                                         <p className="flex flex-col items-center gap-3"><span><MdStarBorder color="yellow" className="text-2xl" /> </span><span>Rate Movies</span></p>
-                                        <p className="flex flex-col items-center gap-3"><span><SiYoutubemusic color="red" className="text-2xl" /> </span><span>Play Trailor</span></p>
+                                        <p className="flex flex-col items-center gap-3"><span><SiYoutubemusic color="red" className="text-2xl cursor-pointer" onClick={()=>setShowTrailar(true)} /> </span><span>Play Trailor</span></p>
                                     </div>
                                 </div>
                                 <div className="flex justify-center">
