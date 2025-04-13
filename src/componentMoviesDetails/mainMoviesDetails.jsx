@@ -10,12 +10,13 @@ const MainMoviesDetails = () => {
     const navigate = useNavigate();
     const {movieId} = useParams();
     const [movieDetails,setMovieDetails] = useState({});
-    const [loading,setLoading] = useState(true);
+    const [loadingDetails,setLoadingDetails] = useState(true);
     const [err,setError] = useState(false);
     const [casting,setCasting] = useState({});
     const [loadTrailar,setLoadTrailar] = useState(false);
     const [keyVideo,setKeyVideo] = useState("");
     const [showTrailar,setShowTrailar] = useState(false);
+    const [errTrailar,setErrorTrailar] = useState(false);
     //get details of movies
     const getMoviesDetails = () => {
         const options = {
@@ -43,11 +44,13 @@ const MainMoviesDetails = () => {
           
           fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`, options)
             .then(res => res.json())
-            .then(res => {setCasting(res);setLoading(false);setError(false)})
-            .catch(() => {setLoading(false);setError(true)});
+            .then(res => {setCasting(res);setLoadingDetails(false);setError(false)})
+            .catch(() => {setLoadingDetails(false);setError(true)});
     }
     //get trailare of movies
     const getTrailer = () => {
+        setLoadTrailar(true);
+        setShowTrailar(true);
         const options = {
             method: 'GET',
             headers: {
@@ -58,23 +61,25 @@ const MainMoviesDetails = () => {
           
           fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`, options)
             .then(res => res.json())
-            .then(res => setKeyVideo(res.results[0].key))
-            .catch(err => console.error(err));
+            .then(res =>{ setKeyVideo(res.results[0].key);setLoadTrailar(false);setErrorTrailar(false)})
+            .catch(() => {setLoadTrailar(false);setErrorTrailar(true);});
+            console.log(errTrailar)
     }
     useEffect(()=>{
         getMoviesDetails();
         getCasting();
     },[])
-
     return(
         <div>
+            {/* loading details movie */}
             {
-                loading
+                loadingDetails
                 ?
                 <div className="h-screen flex items-center justify-center">
                     <div className="loader"></div>
                 </div>
                 :
+            // error details movie 
                 err
                 ?
                 <div className='flex justify-center items-center h-screen text-red-500 text-3xl'>
@@ -87,14 +92,35 @@ const MainMoviesDetails = () => {
                     />
                 </div>
                 :
+                // page details 
                 <div className={`bg-no-repeat bg-cover bg-center relative before:absolute before:content-[" "] before:w-full before:h-full before:top-0 before:bg-gradient-to-b from-black via-transparent  to-black before:opacity-70`} style={{backgroundImage:`url(https://image.tmdb.org/t/p/w600_and_h900_bestv2${movieDetails.backdrop_path})`}}>
+                    {/*start trailar movies  */}
                     {
                         showTrailar
                         &&
-                        <div className="fixed z-10 top-0 flex justify-center h-screen w-screen bg-[#00000063]" onClick={()=>setShowTrailar(false)}>
-                            <iframe className={`absolute transition-opacity border-[20px] border-gray-900`} width="560" height="315" src={`https://www.youtube.com/embed/slSwwaZ0KoM?si=${keyVideo}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div className={`fixed z-10 top-0 flex justify-center h-screen w-screen ${loadTrailar ? "bg-black items-center" : "bg-[#00000063]"}`} onClick={()=>setShowTrailar(false)}>
+                            {
+                                loadTrailar
+                                ?
+                                <div className="loader"></div>
+                                :
+                                errTrailar
+                                ?
+                                <div className={`flex justify-center items-center text-red-500 text-xl lg:text-3xl bg-black w-full h-[40%] lg:w-[30%] border-[20px] border-gray-900 ${errTrailar && "trailAnimation"}`}>
+                                    Not Found
+                                    <DotLottieReact
+                                    src="https://lottie.host/3f1a2a1b-4c5d-41bf-a513-2e6ebc2630b8/xRMGEMLGLh.lottie"
+                                    loop
+                                    autoplay
+                                    className='w-[2em]'
+                                />
+                                </div>
+                                :
+                                <iframe className={`absolute border-[20px] border-gray-900  ${loadTrailar==false && "trailAnimation"}`} width="560" height="315" src={`https://www.youtube.com/embed/${keyVideo}`} title="YouTube video player" ></iframe>
+                            }
                         </div>
                     }
+                    {/* end trailar movies  */}
                     <div className="container mx-auto">
                         <p className="text-[#0dcaf0] text-center text-4xl py-11 font-bold relative">Movie Details</p>
                         <div className="flex flex-col xl:flex-row pb-7">
@@ -136,7 +162,7 @@ const MainMoviesDetails = () => {
                                     <div className="flex flex-col xl:flex-row justify-around items-center">
                                         <p className="flex flex-col items-center gap-3"><span><MdNoteAdd color="green" className="text-2xl" /> </span><span>Add whatchList</span></p>
                                         <p className="flex flex-col items-center gap-3"><span><MdStarBorder color="yellow" className="text-2xl" /> </span><span>Rate Movies</span></p>
-                                        <p className="flex flex-col items-center gap-3"><span><SiYoutubemusic color="red" className="text-2xl cursor-pointer" onClick={()=>setShowTrailar(true)} /> </span><span>Play Trailor</span></p>
+                                        <p className="flex flex-col items-center gap-3"><span><SiYoutubemusic color="red" className="text-2xl cursor-pointer" onClick={()=>getTrailer()} /> </span><span>Play Trailor</span></p>
                                     </div>
                                 </div>
                                 <div className="flex justify-center">
