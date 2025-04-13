@@ -116,7 +116,7 @@ const MainMoviesDetails = () => {
                                 />
                                 </div>
                                 :
-                                <iframe className={`absolute border-[20px] border-gray-900  ${loadTrailar==false && "trailAnimation"}`} width="560" height="315" src={`https://www.youtube.com/embed/${keyVideo}`} title="YouTube video player" ></iframe>
+                                <iframe className={`absolute border-[20px] border-gray-900 w-full h-[50%] lg:w-[40%]  ${loadTrailar==false && "trailAnimation"}`} src={`https://www.youtube.com/embed/${keyVideo}`} title="YouTube video player" ></iframe>
                             }
                         </div>
                     }
