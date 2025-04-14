@@ -8,6 +8,7 @@ import MainFooter from "./component/mainFooter";
 import Series from "./Series";
 import ContactUs from "./contactUs";
 import MoviesDetails from "./moviesDetails";
+import SeriesDetails from "./seriesDetails";
 const App = () => {
   return(
     <div className="bg-black">
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/series" element={<Series/>}/>
         <Route path="/contactus" element={<ContactUs/>}/>
         <Route path="/movie/:movieId/title/:title" element={<MoviesDetails/>}/>
+        <Route path="/series/:seriesId/name/:name" element={<SeriesDetails/>}/>
       </Routes>
       <MainFooter/>
     </div>

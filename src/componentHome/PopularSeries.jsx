@@ -58,9 +58,9 @@ const PopularSeries = () => {
                 className={`px-4 ${window.innerWidth < 720 ? "w-[60%]" : "w-full"}`}
                 >
                 {
-                    popSeries.map(({poster_path},index)=>(
+                    popSeries.map(({poster_path,id,name},index)=>(
                         <SwiperSlide key={index}>
-                            <Link> <img className='bg-cover' src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${poster_path}`} alt="" /></Link>
+                            <Link to={`/series/${id}/name/${name}`}> <img className='bg-cover' src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${poster_path}`} alt="" /></Link>
                         </SwiperSlide>
                     ))
                 }

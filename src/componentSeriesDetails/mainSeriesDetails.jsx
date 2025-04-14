@@ -6,10 +6,10 @@ import { SiYoutubemusic } from "react-icons/si";
 import { Button } from "@material-tailwind/react";
 import {DotLottieReact} from "@lottiefiles/dotlottie-react"
 
-const MainMoviesDetails = () => {
+const MainSeriesDetails = () => {
     const navigate = useNavigate();
-    const {movieId} = useParams();
-    const [movieDetails,setMovieDetails] = useState({});
+    const {seriesId} = useParams();
+    const [seriesDetails,setSeriesDetails] = useState({});
     const [loadingDetails,setLoadingDetails] = useState(true);
     const [err,setError] = useState(false);
     const [casting,setCasting] = useState({});
@@ -17,61 +17,63 @@ const MainMoviesDetails = () => {
     const [keyVideo,setKeyVideo] = useState("");
     const [showTrailar,setShowTrailar] = useState(false);
     const [errTrailar,setErrorTrailar] = useState(false);
-    //get details of movies
-    const getMoviesDetails = () => {
-        const options = {
-            method: 'GET',
-            headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MTViOWNkYTliYWQwOTg1MGNjNTk4ZjMzYzIxMmYyNyIsIm5iZiI6MTcyODA1MDcwOS41NDEsInN1YiI6IjY2ZmZmNjE1MTU5MmVmMWJhOTg1MWM4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BLDzvE3JjpnDnXJp65L2ww7pclm633QVmw5K1JssZEY'
-            }
-          };
-          
-          fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options)
-            .then(res => res.json())
-            .then(res => setMovieDetails(res))
-            .catch(err => console.error(err));
-    }
-    //get casting of movies
-    const getCasting = () => {
-        const options = {
-            method: 'GET',
-            headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MTViOWNkYTliYWQwOTg1MGNjNTk4ZjMzYzIxMmYyNyIsIm5iZiI6MTcyODA1MDcwOS41NDEsInN1YiI6IjY2ZmZmNjE1MTU5MmVmMWJhOTg1MWM4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BLDzvE3JjpnDnXJp65L2ww7pclm633QVmw5K1JssZEY'
-            }
-          };
-          
-          fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`, options)
-            .then(res => res.json())
-            .then(res => {setCasting(res);setLoadingDetails(false);setError(false)})
-            .catch(() => {setLoadingDetails(false);setError(true)});
-    }
-    //get trailare of movies
-    const getTrailer = () => {
-        setLoadTrailar(true);
-        setShowTrailar(true);
-        const options = {
-            method: 'GET',
-            headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MTViOWNkYTliYWQwOTg1MGNjNTk4ZjMzYzIxMmYyNyIsIm5iZiI6MTcyODA1MDcwOS41NDEsInN1YiI6IjY2ZmZmNjE1MTU5MmVmMWJhOTg1MWM4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BLDzvE3JjpnDnXJp65L2ww7pclm633QVmw5K1JssZEY'
-            }
-          };
-          
-          fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`, options)
-            .then(res => res.json())
-            .then(res =>{ setKeyVideo(res.results[0].key);setLoadTrailar(false);setErrorTrailar(false)})
-            .catch(() => {setLoadTrailar(false);setErrorTrailar(true);});
-            console.log(errTrailar)
-    }
-    useEffect(()=>{
-        getMoviesDetails();
-        getCasting();
-    },[])
+        //get details of series
+        const getSeriesDetails = () => {
+            const options = {
+                method: 'GET',
+                headers: {
+                  accept: 'application/json',
+                  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MTViOWNkYTliYWQwOTg1MGNjNTk4ZjMzYzIxMmYyNyIsIm5iZiI6MTcyODA1MDcwOS41NDEsInN1YiI6IjY2ZmZmNjE1MTU5MmVmMWJhOTg1MWM4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BLDzvE3JjpnDnXJp65L2ww7pclm633QVmw5K1JssZEY'
+                }
+              };
+              
+              fetch(`https://api.themoviedb.org/3/tv/${seriesId}?language=en-US`, options)
+                .then(res => res.json())
+                .then(res => setSeriesDetails(res))
+                .catch(err => console.error(err));
+                console.log(seriesDetails)
+
+        }
+        //get casting of series
+        const getCasting = () => {
+            const options = {
+                method: 'GET',
+                headers: {
+                  accept: 'application/json',
+                  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MTViOWNkYTliYWQwOTg1MGNjNTk4ZjMzYzIxMmYyNyIsIm5iZiI6MTcyODA1MDcwOS41NDEsInN1YiI6IjY2ZmZmNjE1MTU5MmVmMWJhOTg1MWM4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BLDzvE3JjpnDnXJp65L2ww7pclm633QVmw5K1JssZEY'
+                }
+              };
+              
+              fetch(`https://api.themoviedb.org/3/tv/${seriesId}/credits?language=en-US`, options)
+                .then(res => res.json())
+                .then(res => {setCasting(res);setLoadingDetails(false);setError(false)})
+                .catch(() => {setLoadingDetails(false);setError(true)});
+        }
+        //get trailare of series
+        const getTrailer = () => {
+            const options = {
+                method: 'GET',
+                headers: {
+                  accept: 'application/json',
+                  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MTViOWNkYTliYWQwOTg1MGNjNTk4ZjMzYzIxMmYyNyIsIm5iZiI6MTcyODA1MDcwOS41NDEsInN1YiI6IjY2ZmZmNjE1MTU5MmVmMWJhOTg1MWM4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BLDzvE3JjpnDnXJp65L2ww7pclm633QVmw5K1JssZEY'
+                }
+              };
+              
+              fetch(`https://api.themoviedb.org/3/tv/${seriesId}/videos?language=en-US`, options)
+                .then(res => res.json())
+                .then(res => { setKeyVideo(res.results[0].key);setLoadTrailar(false);setErrorTrailar(false)})
+                .catch(err => {setLoadTrailar(false);setErrorTrailar(true);});
+            setLoadTrailar(true);
+            setShowTrailar(true);
+        }
+        useEffect(()=>{
+            getSeriesDetails();
+            getCasting();
+        },[])
+
     return(
         <div>
-            {/* loading details movie */}
+            {/* loading details series */}
             {
                 loadingDetails
                 ?
@@ -79,7 +81,7 @@ const MainMoviesDetails = () => {
                     <div className="loader"></div>
                 </div>
                 :
-            // error details movie 
+            // error details series 
                 err
                 ?
                 <div className='flex justify-center items-center h-screen text-red-500 text-3xl'>
@@ -93,7 +95,7 @@ const MainMoviesDetails = () => {
                 </div>
                 :
                 // page details 
-                <div className={`bg-no-repeat bg-cover bg-center relative before:absolute before:content-[" "] before:w-full before:h-full before:top-0 before:bg-gradient-to-b from-black via-transparent  to-black before:opacity-70`} style={{backgroundImage:`url(https://image.tmdb.org/t/p/w600_and_h900_bestv2${movieDetails.backdrop_path})`}}>
+                <div className={`bg-no-repeat bg-cover bg-center relative before:absolute before:content-[" "] before:w-full before:h-full before:top-0 before:bg-gradient-to-b from-black via-transparent  to-black before:opacity-70`} style={{backgroundImage:`url(https://image.tmdb.org/t/p/w600_and_h900_bestv2${seriesDetails.backdrop_path})`}}>
                     {/*start trailar movies  */}
                     {
                         showTrailar
@@ -120,31 +122,31 @@ const MainMoviesDetails = () => {
                             }
                         </div>
                     }
-                    {/* end trailar movies  */}
+                    {/* end trailar series  */}
                     <div className="container mx-auto">
-                        <p className="text-[#0dcaf0] text-center text-4xl py-11 font-bold relative">Movie Details</p>
+                        <p className="text-[#0dcaf0] text-center text-4xl py-11 font-bold relative">Series Details</p>
                         <div className="flex flex-col xl:flex-row pb-7">
                             <div className="flex relative w-full justify-center">
-                                <img className="w-[65%] relative" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movieDetails.poster_path}`} alt="" />
+                                <img className="w-[65%] relative" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${seriesDetails.poster_path}`} alt="" />
                             </div>
                             <div className="grow col-start-2 col-span-2 text-white relative flex flex-col gap-3 text-center xl:text-left">
-                                <p className="text-2xl xl:text-4xl">{movieDetails.original_title}</p>
+                                <p className="text-2xl xl:text-4xl">{seriesDetails.original_name}</p>
                                 <div className="flex flex-col xl:flex-row gap-2 items-center">
                                     <div className="flex items-center">
-                                        <p>{movieDetails.release_date}</p>
-                                        <p>({movieDetails.original_language})</p>
+                                        <p>{seriesDetails.first_air_date}</p>
+                                        <p>({seriesDetails?.languages[0] || " "})</p>
                                     </div>
                                     <div className="flex items-center text-sm flex-wrap">
                                         <FaRegHandPointRight color="yellow"/>
                                         {
-                                            movieDetails.genres?.map((genre)=>(
-                                                <p>{genre.name},</p>
+                                            seriesDetails.created_by?.map((creator)=>(
+                                                <p>{creator.name},</p>
                                             ))
                                         }
                                         <FaRegHandPointLeft color="yellow"/>
                                     </div>
                                 </div>
-                                <p className="text-[1em]"><span className="text-[#0dcaf0] text-center text-4xl py-11">OverView : </span>{movieDetails.overview?.split(".").slice(0,3).join(".")}</p>
+                                <p className="text-[1em]"><span className="text-[#0dcaf0] text-center text-4xl py-11">OverView : </span>{seriesDetails.overview.slice(0,300)}</p>
                                 <p className="text-[#0dcaf0] text-4xl">Casting : </p>
                                 <div className="flex flex-col gap-7 justify-center">
                                     <div className="flex flex-col xl:flex-row justify-around items-center">
@@ -177,4 +179,4 @@ const MainMoviesDetails = () => {
     )
 }
 
-export default MainMoviesDetails;
+export default MainSeriesDetails;
