@@ -126,27 +126,28 @@ const MainSeriesDetails = () => {
                     <div className="container mx-auto">
                         <p className="text-[#0dcaf0] text-center text-4xl py-11 font-bold relative">Series Details</p>
                         <div className="flex flex-col xl:flex-row pb-7">
-                            <div className="flex relative w-full justify-center">
+                            <div className="flex relative w-[40%] justify-center">
                                 <img className="w-[65%] relative" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${seriesDetails.poster_path}`} alt="" />
                             </div>
-                            <div className="grow col-start-2 col-span-2 text-white relative flex flex-col gap-3 text-center xl:text-left">
+                            <div className="w-[60%] col-start-2 col-span-2 text-white relative flex flex-col gap-3 text-center xl:text-left">
                                 <p className="text-2xl xl:text-4xl">{seriesDetails.original_name}</p>
                                 <div className="flex flex-col xl:flex-row gap-2 items-center">
-                                    <div className="flex items-center">
+                                    <div className="flex gap-3 items-center">
                                         <p>{seriesDetails.first_air_date}</p>
-                                        <p>({seriesDetails?.languages[0] || " "})</p>
+                                        <p> ({(seriesDetails?.languages || " " )}) </p>
                                     </div>
                                     <div className="flex items-center text-sm flex-wrap">
                                         <FaRegHandPointRight color="yellow"/>
                                         {
-                                            seriesDetails.created_by?.map((creator)=>(
-                                                <p>{creator.name},</p>
+                                            seriesDetails.genres?.map((genre)=>(
+                                                <p>{genre.name},</p>
                                             ))
                                         }
                                         <FaRegHandPointLeft color="yellow"/>
                                     </div>
+                                    <p> {seriesDetails.episode_run_time != "" && seriesDetails.episode_run_time + " min" }  </p>
                                 </div>
-                                <p className="text-[1em]"><span className="text-[#0dcaf0] text-center text-4xl py-11">OverView : </span>{seriesDetails.overview.slice(0,300)}</p>
+                                <p className="text-[1em]"><span className="text-[#0dcaf0] text-center text-4xl py-11">OverView : </span>{seriesDetails.overview}</p>
                                 <p className="text-[#0dcaf0] text-4xl">Casting : </p>
                                 <div className="flex flex-col gap-7 justify-center">
                                     <div className="flex flex-col xl:flex-row justify-around items-center">
