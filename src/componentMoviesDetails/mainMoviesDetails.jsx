@@ -143,7 +143,7 @@ const MainMoviesDetails = () => {
                                         }
                                         <FaRegHandPointLeft color="yellow"/>
                                     </div>
-                                    <div>{Math.trunc(movieDetails.runtime / 60) + " h"} {Math.round(movieDetails.runtime % 60) + " min"}</div>
+                                    <div>{Math.trunc(movieDetails.runtime / 60) + " h"} {Math.round(movieDetails.runtime % 60) + " min "}</div>
                                 </div>
                                 <p className="text-[1em]"><span className="text-[#0dcaf0] text-center text-4xl py-11">OverView : </span>{movieDetails.overview?.split(".").slice(0,3).join(".")}</p>
                                 <p className="text-[#0dcaf0] text-4xl">Casting : </p>

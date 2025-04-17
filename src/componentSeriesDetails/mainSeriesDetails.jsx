@@ -126,10 +126,10 @@ const MainSeriesDetails = () => {
                     <div className="container mx-auto">
                         <p className="text-[#0dcaf0] text-center text-4xl py-11 font-bold relative">Series Details</p>
                         <div className="flex flex-col xl:flex-row pb-7">
-                            <div className="flex relative w-full md:w-[40%] justify-center">
+                            <div className="flex relative w-full xl:w-[40%] justify-center">
                                 <img className="w-[65%] relative" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${seriesDetails.poster_path}`} alt="" />
                             </div>
-                            <div className="w-full md:w-[60%] col-start-2 col-span-2 text-white relative flex flex-col gap-3 text-center xl:text-left">
+                            <div className="w-full xl:w-[60%] col-start-2 col-span-2 text-white relative flex flex-col gap-3 text-center xl:text-left">
                                 <p className="text-2xl xl:text-4xl">{seriesDetails.original_name}</p>
                                 <div className="flex flex-col xl:flex-row gap-2 items-center">
                                     <div className="flex gap-3 items-center">
