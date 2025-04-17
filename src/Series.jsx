@@ -78,7 +78,7 @@ const Series = () => {
 
 
                     :
-                    allSeries.map(({poster_path,name,vote_average},index)=>(
+                    allSeries.map(({poster_path,name,vote_average,id},index)=>(
                         <Card className={`bg-[#212529] h-[80vh] w-full`} key={index}>
                             <CardHeader
                             className="m-0 rounded h-[65%]"
@@ -104,7 +104,7 @@ const Series = () => {
                             </CardBody>
                             <CardFooter className="text-center h-[10%]">
                                 <Button className="bg-transparent border-2 border-[#0DCAF0] text-[#0DCAF0] hover:bg-[#0DCAF0] hover:text-black">
-                                    <Link>DETAILS</Link>
+                                    <Link to={`/series/${id}/name/${name}`}>DETAILS</Link>
                                 </Button>
                             </CardFooter>
                         </Card>

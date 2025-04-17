@@ -130,7 +130,7 @@ const MainMoviesDetails = () => {
                             <div className="grow col-start-2 col-span-2 text-white relative flex flex-col gap-3 text-center xl:text-left">
                                 <p className="text-2xl xl:text-4xl">{movieDetails.original_title}</p>
                                 <div className="flex flex-col xl:flex-row gap-2 items-center">
-                                    <div className="flex items-center">
+                                    <div className="flex  gap-3 items-center">
                                         <p>{movieDetails.release_date}</p>
                                         <p>({movieDetails.original_language})</p>
                                     </div>
@@ -143,6 +143,7 @@ const MainMoviesDetails = () => {
                                         }
                                         <FaRegHandPointLeft color="yellow"/>
                                     </div>
+                                    <div>{Math.trunc(movieDetails.runtime / 60) + " h"} {Math.round(movieDetails.runtime % 60) + " min"}</div>
                                 </div>
                                 <p className="text-[1em]"><span className="text-[#0dcaf0] text-center text-4xl py-11">OverView : </span>{movieDetails.overview?.split(".").slice(0,3).join(".")}</p>
                                 <p className="text-[#0dcaf0] text-4xl">Casting : </p>
