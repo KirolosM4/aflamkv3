@@ -52,7 +52,7 @@ const TopSeries = () => {
                         />
                     </div>
                     :
-                    tSeries.map(({poster_path,name,vote_average,id,name},index)=>(
+                    tSeries.map(({poster_path,name,vote_average,id},index)=>(
                         <Card className={`bg-[#212529] h-[80vh] w-full`} key={index}>
                             <CardHeader
                             className="m-0 rounded h-[65%]"
