@@ -8,8 +8,8 @@ import {
     Button,
   } from "@material-tailwind/react";
   import ReactStars from 'react-stars'
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { Link } from "react-router-dom";
+import ErrorComp from "../component/error";
 const TopSeries = () => {
     const [tSeries,setTSeries] = useState([]);
     const [loading,setLoading] = useState(true);
@@ -25,7 +25,7 @@ const TopSeries = () => {
           
           fetch('https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1', options)
             .then(res => res.json())
-            .then(res => {setTSeries(res.results);setLoading(false)})
+            .then(res => {setTSeries(res.results);setLoading(false);setErr(false)})
             .catch(() => {setErr(true);setLoading(false)});
     }
     useEffect(()=>{
@@ -42,14 +42,8 @@ const TopSeries = () => {
                     :
                     err
                     ?
-                    <div className='flex justify-center items-center h-[60%] text-red-500 text-3xl'>
-                        Not Found
-                        <DotLottieReact
-                        src="https://lottie.host/3f1a2a1b-4c5d-41bf-a513-2e6ebc2630b8/xRMGEMLGLh.lottie"
-                        loop
-                        autoplay
-                        className='w-[2em]'
-                        />
+                    <div className="h-[60%]">
+                        <ErrorComp/>
                     </div>
                     :
                     tSeries.map(({poster_path,name,vote_average,id},index)=>(

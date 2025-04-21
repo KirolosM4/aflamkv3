@@ -4,7 +4,7 @@ import { FaRegHandPointRight,FaRegHandPointLeft } from "react-icons/fa6";
 import { MdNoteAdd,MdStarBorder } from "react-icons/md";
 import { SiYoutubemusic } from "react-icons/si";
 import { Button } from "@material-tailwind/react";
-import {DotLottieReact} from "@lottiefiles/dotlottie-react"
+import ErrorComp from "../component/error";
 
 const MainSeriesDetails = () => {
     const navigate = useNavigate();
@@ -84,14 +84,8 @@ const MainSeriesDetails = () => {
             // error details series 
                 err
                 ?
-                <div className='flex justify-center items-center h-screen text-red-500 text-3xl'>
-                    Not Found
-                    <DotLottieReact
-                    src="https://lottie.host/3f1a2a1b-4c5d-41bf-a513-2e6ebc2630b8/xRMGEMLGLh.lottie"
-                    loop
-                    autoplay
-                    className='w-[2em]'
-                    />
+                <div className="h-screen">
+                    <ErrorComp/>
                 </div>
                 :
                 // page details 
@@ -108,14 +102,8 @@ const MainSeriesDetails = () => {
                                 :
                                 errTrailar
                                 ?
-                                <div className={`flex justify-center items-center text-red-500 text-xl lg:text-3xl bg-black w-full h-[40%] lg:w-[30%] border-[20px] border-gray-900 ${errTrailar && "trailAnimation"}`}>
-                                    Not Found
-                                    <DotLottieReact
-                                    src="https://lottie.host/3f1a2a1b-4c5d-41bf-a513-2e6ebc2630b8/xRMGEMLGLh.lottie"
-                                    loop
-                                    autoplay
-                                    className='w-[2em]'
-                                />
+                                <div className={`bg-black w-full h-[40%] lg:w-[30%] border-[20px] border-gray-900 ${errTrailar && "trailAnimation"}`}>
+                                    <ErrorComp/>
                                 </div>
                                 :
                                 <iframe className={`absolute border-[20px] border-gray-900 w-full h-[50%] lg:w-[40%]  ${loadTrailar==false && "trailAnimation"}`} src={`https://www.youtube.com/embed/${keyVideo}`} title="YouTube video player" ></iframe>
@@ -123,6 +111,7 @@ const MainSeriesDetails = () => {
                         </div>
                     }
                     {/* end trailar series  */}
+                    {/* start details  */}
                     <div className="container mx-auto">
                         <p className="text-[#0dcaf0] text-center text-4xl py-11 font-bold relative">Series Details</p>
                         <div className="flex flex-col xl:flex-row pb-7">
@@ -145,7 +134,7 @@ const MainSeriesDetails = () => {
                                         }
                                         <FaRegHandPointLeft color="yellow"/>
                                     </div>
-                                    <p> {seriesDetails.episode_run_time != "" && seriesDetails.episode_run_time + " min" }  </p>
+                                    <p> {seriesDetails.episode_run_time != "" && seriesDetails.episode_run_time[0] + " min" }  </p>
                                 </div>
                                 <p className="text-[1em]"><span className="text-[#0dcaf0] text-center text-4xl py-11">OverView : </span>{seriesDetails.overview}</p>
                                 <p className="text-[#0dcaf0] text-4xl">Casting : </p>

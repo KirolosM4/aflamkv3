@@ -4,8 +4,8 @@ import { Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import {DotLottieReact} from "@lottiefiles/dotlottie-react"
 import {Link} from "react-router-dom"
+import ErrorComp from '../component/error';
 const PopularMovies = () => {
     const [popMovies,setPopMovies] = useState([]);
     const [loading,setLoading] = useState(true)
@@ -23,7 +23,7 @@ const PopularMovies = () => {
                 .then(res => {setPopMovies(res.results);setLoading(!loading);setError(false)})
                 .catch(() => {setError(!err);setLoading(false)});
         }
-        useEffect(()=>{
+        useEffect(()=>{ 
             popularMovies();
         },[])
     return(
@@ -32,20 +32,14 @@ const PopularMovies = () => {
             {
                 loading
                 ?
-                <div className='flex justify-center items-center h-[60%]'>
+                <div className="h-[60%] flex items-center justify-center">
                     <div className="loader"></div>
                 </div>
                 :
                 err
                 ?
-                <div className='flex justify-center items-center h-[60%] text-red-500 text-3xl'>
-                    Not Found
-                    <DotLottieReact
-                    src="https://lottie.host/3f1a2a1b-4c5d-41bf-a513-2e6ebc2630b8/xRMGEMLGLh.lottie"
-                    loop
-                    autoplay
-                    className='w-[2em]'
-                    />
+                <div className='h-[60%]'>
+                    <ErrorComp/>
                 </div>
                 :
                 <Swiper

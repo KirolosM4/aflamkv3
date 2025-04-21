@@ -11,7 +11,7 @@ import {
   } from "@material-tailwind/react";
   import ReactStars from 'react-stars'
   import {Link, useParams} from "react-router-dom";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import ErrorComp from "./component/error";
 
 const Movies = () => {
     const [active, setActive] = useState(1);
@@ -66,14 +66,8 @@ const Movies = () => {
                     :
                     err
                     ?
-                    <div className='flex justify-center items-center h-[60%] text-red-500 text-3xl'>
-                        Not Found
-                        <DotLottieReact
-                        src="https://lottie.host/3f1a2a1b-4c5d-41bf-a513-2e6ebc2630b8/xRMGEMLGLh.lottie"
-                        loop
-                        autoplay
-                        className='w-[2em]'
-                    />
+                    <div className='h-[60%]'>
+                        <ErrorComp/>
                     </div>
 
 

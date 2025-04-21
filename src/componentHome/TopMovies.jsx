@@ -8,8 +8,8 @@ import {
     Button,
   } from "@material-tailwind/react";
   import ReactStars from 'react-stars'
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import {Link} from "react-router-dom";
+import ErrorComp from "../component/error";
 const TopMovies = () => {
     const [tMovies,setTopMovies] = useState([]);
     const [loading,setLoading] = useState(true);
@@ -25,7 +25,7 @@ const TopMovies = () => {
           
           fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
             .then(res => res.json())
-            .then(res => {setTopMovies(res.results);setLoading(false)})
+            .then(res => {setTopMovies(res.results);setLoading(false);setErr(false)})
             .catch(() => {setErr(true);setLoading(false)});
     }
     useEffect(()=>{
@@ -42,17 +42,11 @@ const TopMovies = () => {
                     :
                     err
                     ?
-                    <div className='flex justify-center items-center h-[60%] text-red-500 text-3xl'>
-                        Not Found
-                        <DotLottieReact
-                        src="https://lottie.host/3f1a2a1b-4c5d-41bf-a513-2e6ebc2630b8/xRMGEMLGLh.lottie"
-                        loop
-                        autoplay
-                        className='w-[2em]'
-                        />
+                    <div className="h-[60%]">
+                        <ErrorComp/>
                     </div>
                     :
-                    tMovies.map(({poster_path,title,vote_average},index)=>(
+                    tMovies.map(({poster_path,title,id,vote_average},index)=>(
                         <Card className={`bg-[#212529] h-[80vh] w-full`} key={index}>
                             <CardHeader
                             className="m-0 rounded h-[65%]"
@@ -78,7 +72,7 @@ const TopMovies = () => {
                             </CardBody>
                             <CardFooter className="text-center h-[10%]">
                                 <Button className="bg-transparent border-2 border-[#0DCAF0] text-[#0DCAF0] hover:bg-[#0DCAF0] hover:text-black">
-                                    <Link>DETAILS</Link>
+                                    <Link to={`/movie/${id}/title/${title}`}>DETAILS</Link>
                                 </Button>
                             </CardFooter>
                         </Card>
